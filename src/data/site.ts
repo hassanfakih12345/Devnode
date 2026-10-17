@@ -168,7 +168,8 @@ export type Project = {
   accent: string;
   // Screenshots live in public/images/projects/<slug>/
   image?: string;
-  gallery?: { src: string; caption: string }[];
+  // pos: CSS object-position for wide screenshots shown in square tiles
+  gallery?: { src: string; caption: string; pos?: string }[];
 };
 
 export const projects: Project[] = [
@@ -229,14 +230,28 @@ export const projects: Project[] = [
   {
     slug: 'kin-lattafa',
     name: 'Kin Lattafa',
-    url: 'https://www.kinlattafa.store',
+    url: 'http://kinlattafa.store',
     domain: 'kinlattafa.store',
     country: 'DR Congo',
     category: 'E-commerce Store',
     summary:
-      'An online store that lets customers in Kinshasa browse the full product range and place orders directly from their phones.',
-    work: ['Store design and setup', 'Product catalogue', 'Mobile ordering flow', 'Hosting and launch'],
-    accent: '#8B5CF6',
+      'A French-language perfume store in Kinshasa selling Lattafa and other Arabian fragrance houses, with brand filters, promotions and orders sent straight to WhatsApp.',
+    work: [
+      'Online perfume boutique in French for the Congolese market',
+      'Catalogue with filters by gender, new arrivals and promotions',
+      'Brand menu covering Lattafa, Lattafa Pride, Maison Alhambra and more',
+      'Product pages with discounts, stock status and a “when to wear” season guide',
+      'Cart with quantities and subtotal, ordered via WhatsApp in one tap',
+      'Mobile-first design for shoppers on their phones',
+    ],
+    accent: '#B91C1C',
+    image: '/images/projects/kin-lattafa/thumb.jpg',
+    gallery: [
+      { src: '/images/projects/kin-lattafa/catalogue.jpg', caption: 'Catalogue with filters and promotions' },
+      { src: '/images/projects/kin-lattafa/product.jpg', caption: 'Product page with season guide', pos: 'center top' },
+      { src: '/images/projects/kin-lattafa/cart.jpg', caption: 'Cart ordered via WhatsApp', pos: 'right top' },
+      { src: '/images/projects/kin-lattafa/brands-menu.jpg', caption: 'Brands menu', pos: 'left top' },
+    ],
   },
 ];
 

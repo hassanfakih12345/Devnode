@@ -40,7 +40,7 @@ const others = projects.filter((x) => x.slug !== p.slug);
         <div class="gallery">
           {p.gallery.map((g) => (
             <figure>
-              <a href={g.src} target="_blank" rel="noopener"><img src={g.src} alt={`${p.name}: ${g.caption}`} loading="lazy" /></a>
+              <a href={g.src} target="_blank" rel="noopener"><img src={g.src} alt={`${p.name}: ${g.caption}`} loading="lazy" style={g.pos ? `object-position:${g.pos}` : undefined} /></a>
               <figcaption>{g.caption}</figcaption>
             </figure>
           ))}
