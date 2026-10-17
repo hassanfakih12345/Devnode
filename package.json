@@ -6,7 +6,7 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "package": "astro build && cd dist && zip -qr ../devnode-site.zip . && echo Created devnode-site.zip"
+    "package": "astro build && rm -f devnode-site.zip && cd dist && zip -qr ../devnode-site.zip . && echo Created devnode-site.zip"
   },
   "repository": {
     "type": "git",
