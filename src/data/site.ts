@@ -166,9 +166,40 @@ export type Project = {
   summary: string;
   work: string[];
   accent: string;
+  // Screenshots live in public/images/projects/<slug>/
+  image?: string;
+  gallery?: { src: string; caption: string }[];
 };
 
 export const projects: Project[] = [
+  {
+    slug: 'dolook',
+    name: 'DoLook Contracting',
+    url: 'https://www.dolook.sa',
+    domain: 'dolook.sa',
+    country: 'Saudi Arabia',
+    category: 'Corporate Website',
+    summary:
+      'A bilingual corporate website for a Saudi contracting company founded in 2001, presenting its four divisions, 20+ projects, major clients and official certificates.',
+    work: [
+      'Bilingual Arabic / English website with full right-to-left support',
+      'Dedicated pages for the company’s four divisions',
+      'Project portfolio filterable by status and division',
+      'Project pages with 3D image galleries, floor plans and area tables',
+      'Clients and certificates pages with in-browser PDF viewing',
+      'Quote request form that opens WhatsApp, ready to send',
+    ],
+    accent: '#1E3A8A',
+    image: '/images/projects/dolook/thumb.jpg',
+    gallery: [
+      { src: '/images/projects/dolook/home.jpg', caption: 'Homepage' },
+      { src: '/images/projects/dolook/projects.jpg', caption: 'Project portfolio with filters' },
+      { src: '/images/projects/dolook/gallery.jpg', caption: 'Project image gallery' },
+      { src: '/images/projects/dolook/clients.jpg', caption: 'Clients & partners' },
+      { src: '/images/projects/dolook/certificates.jpg', caption: 'Certificates' },
+      { src: '/images/projects/dolook/contact.jpg', caption: 'Contact & WhatsApp quote form' },
+    ],
+  },
   {
     slug: 'kin-lattafa',
     name: 'Kin Lattafa',
@@ -192,18 +223,6 @@ export const projects: Project[] = [
       'A professional company website that presents the brand, its offering and an easy way for new clients to get in touch.',
     work: ['Website design', 'Development', 'Contact integration', 'Hosting and launch'],
     accent: '#10B981',
-  },
-  {
-    slug: 'dolook',
-    name: 'DoLook',
-    url: 'https://www.dolook.sa',
-    domain: 'dolook.sa',
-    country: 'Saudi Arabia',
-    category: 'Brand Website',
-    summary:
-      'A modern brand website for the Saudi market, built to look sharp on mobile and load quickly for customers across the Kingdom.',
-    work: ['Brand website design', 'Development', 'Mobile optimisation', 'Hosting and launch'],
-    accent: '#F59E0B',
   },
 ];
 

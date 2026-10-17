@@ -7,7 +7,7 @@ const { project: p } = Astro.props;
 ---
 <article class="project">
   <a href={`/portfolio/${p.slug}/`} class="thumb" aria-label={`${p.name} case study`}>
-    <BrowserMock name={p.name} domain={p.domain} accent={p.accent} category={p.category} />
+    <BrowserMock name={p.name} domain={p.domain} accent={p.accent} category={p.category} image={p.image} />
   </a>
   <div class="meta">
     <span>{p.category}</span><span><Icon name="pin" size={14} /> {p.country}</span>

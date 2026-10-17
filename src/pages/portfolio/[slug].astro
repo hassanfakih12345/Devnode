@@ -20,7 +20,7 @@ const others = projects.filter((x) => x.slug !== p.slug);
 
   <section class="section">
     <div class="container cols">
-      <BrowserMock name={p.name} domain={p.domain} accent={p.accent} category={p.category} />
+      <BrowserMock name={p.name} domain={p.domain} accent={p.accent} category={p.category} image={p.image} />
       <div>
         <h2>What we delivered</h2>
         <ul class="checklist">{p.work.map((w) => <li><Icon name="check" size={18} /> {w}</li>)}</ul>
@@ -33,7 +33,23 @@ const others = projects.filter((x) => x.slug !== p.slug);
     </div>
   </section>
 
-  <section class="section soft">
+  {p.gallery && p.gallery.length > 0 && (
+    <section class="section soft">
+      <div class="container">
+        <h2>Inside the website</h2>
+        <div class="gallery">
+          {p.gallery.map((g) => (
+            <figure>
+              <a href={g.src} target="_blank" rel="noopener"><img src={g.src} alt={`${p.name}: ${g.caption}`} loading="lazy" /></a>
+              <figcaption>{g.caption}</figcaption>
+            </figure>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <section class="section">
     <div class="container">
       <h2>More projects</h2>
       <div class="grid grid-2" style="margin-top:28px">{others.map((o) => <ProjectCard project={o} />)}</div>
@@ -49,5 +65,11 @@ const others = projects.filter((x) => x.slug !== p.slug);
   dl div { display: flex; justify-content: space-between; border-bottom: 1px solid var(--line); padding-bottom: 10px; }
   dt { color: var(--muted); }
   dd { margin: 0; font-weight: 600; color: var(--navy); }
+  .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px; margin-top: 28px; }
+  figure { margin: 0; }
+  figure a { display: block; border-radius: 12px; overflow: hidden; border: 1px solid var(--line); box-shadow: var(--shadow); background: #fff; }
+  figure img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: top; transition: transform .3s ease; }
+  figure a:hover img { transform: scale(1.02); }
+  figcaption { margin-top: 10px; font-size: .92rem; color: var(--muted); font-weight: 500; }
   @media (max-width: 860px) { .cols { grid-template-columns: 1fr; } }
 </style>
