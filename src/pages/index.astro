@@ -1,0 +1,222 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import WhatsAppIcon from '../components/WhatsAppIcon.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import ProcessSteps from '../components/ProcessSteps.astro';
+import CtaBand from '../components/CtaBand.astro';
+import LogoMark from '../components/LogoMark.astro';
+import { services, projects, values, pricing, primaryPhone, waLink, testimonials } from '../data/site';
+---
+<Base
+  title="DevNode"
+  description="DevNode builds professional, fast websites for businesses in Lebanon, Africa and the Gulf. From $500 including planning, development and one year of hosting."
+>
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <span class="eyebrow">Web design &amp; development agency</span>
+        <h1>Professional websites that bring you <span class="grad">new clients</span>.</h1>
+        <p class="lead">
+          We design, build and host websites for businesses in Lebanon, Africa and the Gulf.
+          Delivered fast, priced fairly, and ready to win you customers from day one.
+        </p>
+        <div class="btn-row">
+          <a class="btn btn-wa" href={waLink(primaryPhone.wa)} target="_blank" rel="noopener"><WhatsAppIcon size={20} /> Chat on WhatsApp</a>
+          <a class="btn btn-outline" href="/portfolio/">See our work <Icon name="arrow" size={18} /></a>
+        </div>
+        <ul class="hero-points">
+          <li><Icon name="check" size={18} /> From ${pricing.launch}, hosting included</li>
+          <li><Icon name="check" size={18} /> Live in 1–3 weeks</li>
+          <li><Icon name="check" size={18} /> Mobile-first &amp; SEO-ready</li>
+        </ul>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <div class="window">
+          <div class="bar"><i></i><i></i><i></i><span>yourbusiness.com</span></div>
+          <div class="body">
+            <div class="row w60"></div>
+            <div class="row w40"></div>
+            <div class="pill"></div>
+            <div class="tiles"><span></span><span></span><span></span></div>
+          </div>
+        </div>
+        <div class="float-card speed"><Icon name="bolt" size={18} /> <span><strong>98</strong> Performance</span></div>
+        <div class="float-card mark"><LogoMark size={44} /></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">What we do</span>
+        <h2>Everything your business needs to succeed online</h2>
+        <p class="lead">From your first company website to an online store, we handle the design, development, hosting and maintenance.</p>
+      </div>
+      <div class="grid grid-3">
+        {services.map((s) => (
+          <a class="card service" href={`/services/${s.slug}/`}>
+            <div class="icon-badge"><Icon name={s.icon} /></div>
+            <h3>{s.title}</h3>
+            <p>{s.short}</p>
+            <span class="more">Learn more <Icon name="arrow" size={16} /></span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section dark">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Why DevNode</span>
+        <h2>Built on three promises</h2>
+      </div>
+      <div class="grid grid-3">
+        {values.map((v) => (
+          <div class="value">
+            <div class="icon-badge dark-badge"><Icon name={v.icon} /></div>
+            <h3>{v.title}</h3>
+            <p>{v.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head split">
+        <div>
+          <span class="eyebrow">Our work</span>
+          <h2>Recent projects</h2>
+          <p class="lead">Websites and online stores we have launched for clients across Africa and the Gulf.</p>
+        </div>
+        <a class="btn btn-outline" href="/portfolio/">View portfolio <Icon name="arrow" size={18} /></a>
+      </div>
+      <div class="grid grid-3">
+        {projects.map((p) => <ProjectCard project={p} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section soft">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">How it works</span>
+        <h2>From idea to launch in four steps</h2>
+      </div>
+      <ProcessSteps />
+    </div>
+  </section>
+
+  {testimonials.length > 0 && (
+    <section class="section">
+      <div class="container">
+        <div class="section-head center">
+          <span class="eyebrow">Testimonials</span>
+          <h2>What our clients say</h2>
+        </div>
+        <div class="grid grid-3">
+          {testimonials.map((t) => (
+            <figure class="card quote">
+              <blockquote>“{t.quote}”</blockquote>
+              <figcaption><strong>{t.name}</strong><span>{t.company}</span></figcaption>
+            </figure>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <section class="section">
+    <div class="container">
+      <div class="price-teaser">
+        <div>
+          <span class="eyebrow">Simple pricing</span>
+          <h2>One clear price. No surprises.</h2>
+          <p class="lead">Planning, design, development and a full year of hosting for a single launch price. Renew yearly for hosting and maintenance.</p>
+          <a class="btn btn-primary" href="/pricing/">See pricing details <Icon name="arrow" size={18} /></a>
+        </div>
+        <div class="price-box">
+          <span class="label">Website launch</span>
+          <div class="amount"><sup>$</sup>{pricing.launch}</div>
+          <span class="sub">first year, all-inclusive</span>
+          <hr />
+          <div class="rows">
+            <div><span>Yearly renewal</span><strong>${pricing.renewal}</strong></div>
+            <div><span>Extra work</span><strong>${pricing.hourly}/hour</strong></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand />
+</Base>
+
+<style>
+  .hero {
+    padding: clamp(56px, 8vw, 100px) 0 clamp(64px, 9vw, 110px);
+    background: radial-gradient(circle at 100% 0%, rgba(34, 211, 238, .12), transparent 40%),
+      radial-gradient(circle at 0% 100%, rgba(59, 130, 246, .08), transparent 40%);
+    overflow: hidden;
+  }
+  .hero-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 56px; align-items: center; }
+  .grad { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .hero .lead { margin-bottom: 28px; }
+  .hero-points { list-style: none; padding: 0; margin: 28px 0 0; display: flex; flex-wrap: wrap; gap: 10px 22px; color: var(--muted); font-size: .95rem; }
+  .hero-points li { display: inline-flex; align-items: center; gap: 6px; }
+  .hero-points :global(svg) { color: var(--blue); }
+
+  .hero-visual { position: relative; padding: 30px 20px; }
+  .window { background: #fff; border-radius: 16px; box-shadow: var(--shadow-lg); border: 1px solid var(--line); overflow: hidden; transform: rotate(-1.5deg); }
+  .bar { display: flex; gap: 6px; align-items: center; padding: 12px 14px; background: #eef2f8; }
+  .bar i { width: 10px; height: 10px; border-radius: 50%; background: #cfd8e6; }
+  .bar span { margin-left: 10px; font-size: .75rem; color: var(--muted); background: #fff; padding: 3px 12px; border-radius: 6px; }
+  .body { padding: 28px; display: grid; gap: 12px; background: linear-gradient(160deg, #eef8fd, #fff 60%); }
+  .row { height: 14px; border-radius: 7px; background: var(--navy); }
+  .row.w60 { width: 70%; } .row.w40 { width: 45%; background: #cfd8e6; height: 9px; }
+  .pill { width: 120px; height: 34px; border-radius: 8px; background: var(--grad); margin: 6px 0 10px; }
+  .tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .tiles span { height: 72px; border-radius: 10px; background: #e5f2fa; }
+  .float-card { position: absolute; background: #fff; border-radius: 12px; box-shadow: var(--shadow-lg); display: flex; align-items: center; gap: 8px; font-size: .85rem; color: var(--muted); }
+  .speed { left: -6px; bottom: 6px; padding: 12px 16px; }
+  .speed :global(svg) { color: #f59e0b; }
+  .speed strong { color: #10b981; font-size: 1.1rem; font-family: var(--font-display); }
+  .mark { right: 0; top: 0; padding: 8px; }
+
+  .service { text-decoration: none; color: inherit; display: flex; flex-direction: column; transition: transform .2s ease, border-color .2s ease; }
+  .service:hover { transform: translateY(-4px); border-color: rgba(34, 156, 216, .4); }
+  .service p { color: var(--muted); font-size: .98rem; }
+  .more { margin-top: auto; display: inline-flex; align-items: center; gap: 6px; color: var(--blue-dark); font-weight: 600; font-size: .95rem; }
+
+  .value p { color: #aebbd2; }
+  .dark-badge { background: rgba(34, 211, 238, .12); color: var(--cyan); }
+
+  .split { max-width: none; display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; }
+  .split > div { max-width: 640px; }
+
+  .quote { margin: 0; }
+  .quote blockquote { margin: 0 0 16px; font-size: 1.02rem; }
+  .quote figcaption { display: flex; flex-direction: column; font-size: .9rem; }
+  .quote figcaption span { color: var(--muted); }
+
+  .price-teaser { display: grid; grid-template-columns: 1.2fr .8fr; gap: 48px; align-items: center; }
+  .price-teaser .lead { margin-bottom: 24px; }
+  .price-box { background: var(--navy); color: #c9d5e8; border-radius: 20px; padding: 36px; box-shadow: var(--shadow-lg); }
+  .label { font-size: .85rem; text-transform: uppercase; letter-spacing: .1em; color: var(--cyan); font-weight: 600; }
+  .amount { font-family: var(--font-display); font-size: 4rem; font-weight: 700; color: #fff; line-height: 1.1; margin-top: 8px; }
+  .amount sup { font-size: 1.6rem; vertical-align: super; margin-right: 2px; }
+  .sub { color: #aebbd2; }
+  hr { border: 0; border-top: 1px solid rgba(255,255,255,.12); margin: 22px 0; }
+  .rows { display: grid; gap: 10px; }
+  .rows div { display: flex; justify-content: space-between; }
+  .rows strong { color: #fff; }
+
+  @media (max-width: 900px) {
+    .hero-grid, .price-teaser { grid-template-columns: 1fr; }
+    .hero-visual { max-width: 480px; }
+  }
+</style>

@@ -1,0 +1,66 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import Icon from '../../components/Icon.astro';
+import WhatsAppIcon from '../../components/WhatsAppIcon.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { services, pricing, primaryPhone, waLink, type Service } from '../../data/site';
+
+export function getStaticPaths() {
+  return services.map((service) => ({ params: { slug: service.slug }, props: { service } }));
+}
+const { service } = Astro.props as { service: Service };
+const others = services.filter((s) => s.slug !== service.slug).slice(0, 3);
+---
+<Base title={service.title} description={`${service.short} DevNode serves businesses in Lebanon, Africa and the Gulf.`}>
+  <PageHero eyebrow="Service" title={service.title} lead={service.intro}>
+    <div class="btn-row" style="margin-top:28px">
+      <a class="btn btn-wa" href={waLink(primaryPhone.wa, `Hello DevNode, I'm interested in ${service.title}.`)} target="_blank" rel="noopener"><WhatsAppIcon size={20} /> Ask on WhatsApp</a>
+      <a class="btn btn-ghost-light" href="/contact/#quote">Request a Quote</a>
+    </div>
+  </PageHero>
+
+  <section class="section">
+    <div class="container cols">
+      <div>
+        <h2>What's included</h2>
+        <ul class="checklist">{service.includes.map((x) => <li><Icon name="check" size={18} /> {x}</li>)}</ul>
+      </div>
+      <aside class="card side">
+        <h3>Ideal for</h3>
+        <p>{service.idealFor}</p>
+        <hr />
+        <h3>Pricing</h3>
+        <p>New websites start at <strong>${pricing.launch}</strong> including one year of hosting. Extra work is billed at ${pricing.hourly}/hour.</p>
+        <a href="/pricing/">See full pricing <Icon name="arrow" size={16} /></a>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section soft">
+    <div class="container">
+      <h2>Other services</h2>
+      <div class="grid grid-3" style="margin-top:28px">
+        {others.map((s) => (
+          <a class="card other" href={`/services/${s.slug}/`}>
+            <div class="icon-badge"><Icon name={s.icon} /></div>
+            <h3>{s.title}</h3>
+            <p>{s.short}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CtaBand />
+</Base>
+
+<style>
+  .cols { display: grid; grid-template-columns: 1.4fr 1fr; gap: 48px; align-items: start; }
+  .side p { color: var(--muted); }
+  .side a { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; text-decoration: none; }
+  .side hr { border: 0; border-top: 1px solid var(--line); margin: 20px 0; }
+  .other { text-decoration: none; color: inherit; }
+  .other p { color: var(--muted); font-size: .98rem; margin: 0; }
+  @media (max-width: 860px) { .cols { grid-template-columns: 1fr; } }
+</style>

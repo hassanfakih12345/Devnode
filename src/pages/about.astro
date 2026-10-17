@@ -1,0 +1,67 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Icon from '../components/Icon.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { manager, values, site } from '../data/site';
+---
+<Base title="About Us" description="DevNode is a web design and development company serving businesses in Lebanon, Africa and the Gulf, led by founder Hassan Ahmad Fakih.">
+  <PageHero eyebrow="About DevNode" title="We help businesses grow with websites that work" lead="DevNode is a web design and development company serving clients across Lebanon, Africa and the Gulf." />
+
+  <section class="section">
+    <div class="container cols">
+      <div class="prose">
+        <h2 style="margin-top:0">Our story</h2>
+        <p>Too many businesses in our region still depend only on social media, or have an outdated website that loads slowly and doesn't look good on a phone. Often it's because building a proper site seemed too expensive, too slow or too complicated.</p>
+        <p>DevNode was created to change that. We give businesses a professional website with one clear price, a short timeline, and a team that stays available after launch. Our name reflects how we work: every project is a network of connected pieces (design, code, hosting, search) and we make sure they all work together.</p>
+        <p>Today we work with clients in Lebanon, the Democratic Republic of the Congo, Saudi Arabia and beyond, mostly remotely over WhatsApp and video calls.</p>
+      </div>
+      <div class="stats">
+        <div><strong>3</strong><span>Regions served</span></div>
+        <div><strong>1–3</strong><span>Weeks to launch</span></div>
+        <div><strong>$500</strong><span>All-inclusive start</span></div>
+        <div><strong>100%</strong><span>Mobile-friendly sites</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section soft">
+    <div class="container">
+      <div class="section-head"><span class="eyebrow">Our values</span><h2>What we stand for</h2></div>
+      <div class="grid grid-3">
+        {values.map((v) => (
+          <div class="card"><div class="icon-badge"><Icon name={v.icon} /></div><h3>{v.title}</h3><p style="color:var(--muted);margin:0">{v.text}</p></div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container leader">
+      <div class="photo">
+        {manager.photo ? <img src={manager.photo} alt={manager.name} width="320" height="380" /> : <div class="initials" aria-hidden="true">{manager.initials}</div>}
+      </div>
+      <div>
+        <span class="eyebrow">Leadership</span>
+        <h2>{manager.name}</h2>
+        <p class="role">{manager.role}</p>
+        {manager.bio.map((p) => <p>{p}</p>)}
+      </div>
+    </div>
+  </section>
+
+  <CtaBand title="Let's build something together" />
+</Base>
+
+<style>
+  .cols { display: grid; grid-template-columns: 1.4fr 1fr; gap: 56px; align-items: center; }
+  .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .stats div { background: var(--bg-soft); border-radius: var(--radius); padding: 24px; display: flex; flex-direction: column; }
+  .stats strong { font-family: var(--font-display); font-size: 2rem; color: var(--navy); }
+  .stats span { color: var(--muted); font-size: .92rem; }
+  .leader { display: grid; grid-template-columns: 320px 1fr; gap: 56px; align-items: center; }
+  .photo img, .initials { width: 100%; aspect-ratio: 32 / 38; border-radius: 20px; object-fit: cover; box-shadow: var(--shadow-lg); }
+  .initials { display: grid; place-items: center; background: var(--navy); background-image: var(--grad); color: #fff; font-family: var(--font-display); font-size: 5rem; font-weight: 700; }
+  .role { color: var(--blue-dark); font-weight: 600; margin-top: -.6em; }
+  @media (max-width: 860px) { .cols, .leader { grid-template-columns: 1fr; } .photo { max-width: 280px; } }
+</style>

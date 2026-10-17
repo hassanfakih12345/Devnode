@@ -1,0 +1,53 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import BrowserMock from '../../components/BrowserMock.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import Icon from '../../components/Icon.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { projects, type Project } from '../../data/site';
+
+export function getStaticPaths() {
+  return projects.map((project) => ({ params: { slug: project.slug }, props: { project } }));
+}
+const { project: p } = Astro.props as { project: Project };
+const others = projects.filter((x) => x.slug !== p.slug);
+---
+<Base title={`${p.name} – ${p.category}`} description={`${p.summary} Built by DevNode.`}>
+  <PageHero eyebrow={`${p.category} · ${p.country}`} title={p.name} lead={p.summary}>
+    <a class="btn btn-primary" style="margin-top:24px" href={p.url} target="_blank" rel="noopener">Visit {p.domain} <Icon name="external" size={17} /></a>
+  </PageHero>
+
+  <section class="section">
+    <div class="container cols">
+      <BrowserMock name={p.name} domain={p.domain} accent={p.accent} category={p.category} />
+      <div>
+        <h2>What we delivered</h2>
+        <ul class="checklist">{p.work.map((w) => <li><Icon name="check" size={18} /> {w}</li>)}</ul>
+        <dl>
+          <div><dt>Client</dt><dd>{p.name}</dd></div>
+          <div><dt>Market</dt><dd>{p.country}</dd></div>
+          <div><dt>Type</dt><dd>{p.category}</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section class="section soft">
+    <div class="container">
+      <h2>More projects</h2>
+      <div class="grid grid-2" style="margin-top:28px">{others.map((o) => <ProjectCard project={o} />)}</div>
+    </div>
+  </section>
+
+  <CtaBand title="Want a website like this?" />
+</Base>
+
+<style>
+  .cols { display: grid; grid-template-columns: 1.2fr 1fr; gap: 48px; align-items: center; }
+  dl { display: grid; gap: 10px; margin: 28px 0 0; }
+  dl div { display: flex; justify-content: space-between; border-bottom: 1px solid var(--line); padding-bottom: 10px; }
+  dt { color: var(--muted); }
+  dd { margin: 0; font-weight: 600; color: var(--navy); }
+  @media (max-width: 860px) { .cols { grid-template-columns: 1fr; } }
+</style>

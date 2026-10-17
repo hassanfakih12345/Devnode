@@ -1,0 +1,5 @@
+node_modules/
+dist/
+.astro/
+devnode-site.zip
+.DS_Store

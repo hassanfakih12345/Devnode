@@ -1,0 +1,52 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Icon from '../components/Icon.astro';
+import WhatsAppIcon from '../components/WhatsAppIcon.astro';
+import { primaryPhone, waLink, site } from '../data/site';
+const roles = [
+  { title: 'Front-end Developer', type: 'Remote · Freelance', text: 'HTML, CSS, JavaScript and a modern framework. You care about clean, fast, responsive interfaces.' },
+  { title: 'Web Designer (UI)', type: 'Remote · Freelance', text: 'You design clear, professional websites in Figma and understand how design turns visitors into clients.' },
+  { title: 'Sales & Client Relations', type: 'Lebanon / Africa / Gulf · Commission', text: 'You know businesses in your market and can introduce them to DevNode. Arabic, English or French a plus.' },
+];
+const msg = 'Hello DevNode, I would like to apply for a position. Here is my CV / portfolio:';
+---
+<Base title="Careers" description="Join DevNode. We work with freelance developers, designers and sales partners across Lebanon, Africa and the Gulf.">
+  <PageHero eyebrow="Careers" title="Grow with DevNode" lead="We're always happy to meet talented developers, designers and sales partners who share our standards for quality and speed." />
+  <section class="section">
+    <div class="container">
+      <div class="grid grid-3">
+        {roles.map((r) => (
+          <article class="card role">
+            <div class="icon-badge"><Icon name="briefcase" /></div>
+            <h3>{r.title}</h3>
+            <span class="type">{r.type}</span>
+            <p>{r.text}</p>
+            <a class="apply" href={waLink(primaryPhone.wa, `${msg} (${r.title})`)} target="_blank" rel="noopener">Apply <Icon name="arrow" size={16} /></a>
+          </article>
+        ))}
+      </div>
+      <div class="card open">
+        <div>
+          <h2>Don't see your role?</h2>
+          <p>Send us your CV or portfolio and tell us how you'd like to contribute.</p>
+        </div>
+        <div class="btn-row">
+          <a class="btn btn-wa" href={waLink(primaryPhone.wa, msg)} target="_blank" rel="noopener"><WhatsAppIcon size={20} /> Send on WhatsApp</a>
+          {site.email && <a class="btn btn-outline" href={`mailto:${site.email}?subject=Job application`}><Icon name="mail" size={18} /> Email us</a>}
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .role { display: flex; flex-direction: column; }
+  .role h3 { margin-bottom: .2em; }
+  .type { font-size: .85rem; color: var(--blue-dark); font-weight: 600; margin-bottom: 12px; }
+  .role p { color: var(--muted); font-size: .98rem; }
+  .apply { margin-top: auto; display: inline-flex; align-items: center; gap: 6px; font-weight: 600; text-decoration: none; }
+  .open { margin-top: 40px; display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; background: var(--bg-soft); }
+  .open h2 { font-size: 1.5rem; margin-bottom: .3em; }
+  .open p { margin: 0; color: var(--muted); }
+</style>

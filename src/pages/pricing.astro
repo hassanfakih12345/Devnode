@@ -1,0 +1,83 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Icon from '../components/Icon.astro';
+import WhatsAppIcon from '../components/WhatsAppIcon.astro';
+import Faq from '../components/Faq.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { pricing, primaryPhone, waLink } from '../data/site';
+const launchIncludes = [
+  'Planning session for pages, content and goals',
+  'Custom design in your brand colours',
+  'Full development, mobile-first',
+  'Content writing support',
+  'WhatsApp, phone and contact form integration',
+  'Basic SEO and Google indexing',
+  'Domain connection and SSL certificate',
+  'Publishing and 1 full year of hosting',
+];
+const renewalIncludes = [
+  'Hosting for another year',
+  'Security and software updates',
+  'Regular backups',
+  'Uptime monitoring',
+  'Bug fixes and technical support',
+];
+const extras = ['New pages', 'New sections on existing pages', 'Features not in the first version', 'Integrations (payments, booking, etc.)'];
+---
+<Base title="Pricing" description={`Transparent website pricing: $${pricing.launch} for planning, development and one year of hosting. $${pricing.renewal}/year renewal. Extras at $${pricing.hourly}/hour.`}>
+  <PageHero eyebrow="Pricing" title="Simple, transparent pricing" lead="One launch price that covers everything you need to go live, and a clear yearly plan to keep it running." />
+
+  <section class="section">
+    <div class="container plans">
+      <article class="plan featured">
+        <span class="badge">Get started</span>
+        <h2>Website Launch</h2>
+        <p class="desc">Everything to plan, build and publish your website.</p>
+        <div class="price"><sup>$</sup>{pricing.launch}<span>first year</span></div>
+        <ul class="checklist">{launchIncludes.map((x) => <li><Icon name="check" size={18} /> {x}</li>)}</ul>
+        <a class="btn btn-wa" href={waLink(primaryPhone.wa, `Hello DevNode, I'd like to start a website ($${pricing.launch} plan).`)} target="_blank" rel="noopener"><WhatsAppIcon size={20} /> Start on WhatsApp</a>
+      </article>
+
+      <article class="plan">
+        <h2>Yearly Renewal</h2>
+        <p class="desc">From the second year onwards, we keep your site online and healthy.</p>
+        <div class="price"><sup>$</sup>{pricing.renewal}<span>per year</span></div>
+        <ul class="checklist">{renewalIncludes.map((x) => <li><Icon name="check" size={18} /> {x}</li>)}</ul>
+      </article>
+
+      <article class="plan">
+        <h2>Additions</h2>
+        <p class="desc">Grow your website whenever you need. We estimate the hours before we start.</p>
+        <div class="price"><sup>$</sup>{pricing.hourly}<span>per hour</span></div>
+        <ul class="checklist">{extras.map((x) => <li><Icon name="check" size={18} /> {x}</li>)}</ul>
+      </article>
+    </div>
+    <p class="container note">All prices in US dollars. Domain registration fees (if you don't own one yet) are paid separately at cost.</p>
+  </section>
+
+  <section class="section soft">
+    <div class="container">
+      <div class="section-head center"><span class="eyebrow">FAQ</span><h2>Common questions</h2></div>
+      <Faq />
+    </div>
+  </section>
+
+  <CtaBand />
+</Base>
+
+<style>
+  .plans { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; align-items: stretch; }
+  .plan { position: relative; display: flex; flex-direction: column; border: 1px solid var(--line); border-radius: 18px; padding: 32px; background: #fff; box-shadow: var(--shadow); }
+  .plan h2 { font-size: 1.4rem; margin-bottom: .3em; }
+  .desc { color: var(--muted); font-size: .98rem; min-height: 3.2em; }
+  .price { font-family: var(--font-display); font-weight: 700; font-size: 3.2rem; color: var(--navy); line-height: 1; margin: 8px 0 24px; }
+  .price sup { font-size: 1.3rem; vertical-align: super; }
+  .price span { font-family: var(--font-body); font-size: .95rem; font-weight: 500; color: var(--muted); margin-left: 6px; }
+  .checklist { margin-bottom: 28px; font-size: .98rem; }
+  .plan .btn { margin-top: auto; }
+  .featured { border: 2px solid var(--blue); box-shadow: var(--shadow-lg); }
+  .badge { position: absolute; top: -13px; left: 32px; background: var(--grad); color: #fff; font-size: .78rem; font-weight: 600; padding: 4px 12px; border-radius: 99px; }
+  .note { color: var(--muted); font-size: .9rem; margin-top: 24px; text-align: center; }
+  @media (max-width: 960px) { .plans { grid-template-columns: 1fr; max-width: 520px; margin: 0 auto; } .desc { min-height: 0; } }
+</style>

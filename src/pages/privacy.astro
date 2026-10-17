@@ -1,0 +1,27 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import { site, phones } from '../data/site';
+---
+<Base title="Privacy Policy" description="How DevNode collects and uses information submitted through devnode.info.">
+  <PageHero title="Privacy Policy" lead="Last updated: October 2026" />
+  <section class="section">
+    <div class="container prose">
+      <p>This policy explains what information DevNode ("we") collects through devnode.info and how we use it.</p>
+      <h2>Information we collect</h2>
+      <ul>
+        <li><strong>Contact and quote forms:</strong> your name, phone/WhatsApp number, email, company and project details that you choose to send us.</li>
+        <li><strong>WhatsApp messages:</strong> when you contact us on WhatsApp, your messages are handled by WhatsApp under its own privacy policy.</li>
+        <li><strong>Analytics:</strong> anonymous usage data (pages visited, device type, approximate location) collected through Google Analytics to improve the website.</li>
+      </ul>
+      <h2>How we use it</h2>
+      <p>We use your information only to reply to your request, prepare quotes, deliver our services and improve our website. We do not sell or rent your personal information to anyone.</p>
+      <h2>Data retention</h2>
+      <p>We keep enquiry information only as long as needed to respond and manage our business relationship with you.</p>
+      <h2>Your rights</h2>
+      <p>You can ask us at any time to view, correct or delete the information you sent us.</p>
+      <h2>Contact</h2>
+      <p>For any privacy question, contact us on WhatsApp at {phones.map((p) => p.display).join(' or ')}{site.email && <> or by email at <a href={`mailto:${site.email}`}>{site.email}</a></>}.</p>
+    </div>
+  </section>
+</Base>

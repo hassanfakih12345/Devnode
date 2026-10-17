@@ -1,0 +1,59 @@
+---
+import Logo from './Logo.astro';
+import Icon from './Icon.astro';
+import { site, phones, services, waLink } from '../data/site';
+const year = new Date().getFullYear();
+---
+<footer class="site-footer">
+  <div class="container cols">
+    <div class="brand">
+      <Logo light />
+      <p>Professional websites for businesses in Lebanon, Africa and the Gulf. Built fast, priced fairly, hosted for you.</p>
+    </div>
+    <div>
+      <h4>Services</h4>
+      <ul>{services.map((s) => <li><a href={`/services/${s.slug}/`}>{s.title}</a></li>)}</ul>
+    </div>
+    <div>
+      <h4>Company</h4>
+      <ul>
+        <li><a href="/about/">About</a></li>
+        <li><a href="/portfolio/">Portfolio</a></li>
+        <li><a href="/pricing/">Pricing</a></li>
+        <li><a href="/blog/">Blog</a></li>
+        <li><a href="/careers/">Careers</a></li>
+        <li><a href="/contact/">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Get in touch</h4>
+      <ul class="contact">
+        {phones.map((p) => (
+          <li><a href={waLink(p.wa)} target="_blank" rel="noopener"><Icon name="phone" size={16} /> {p.display} <span class="tag">{p.label}</span></a></li>
+        ))}
+        {site.email && <li><a href={`mailto:${site.email}`}><Icon name="mail" size={16} /> {site.email}</a></li>}
+        <li><span><Icon name="globe" size={16} /> Serving Lebanon, Africa &amp; the Gulf</span></li>
+      </ul>
+    </div>
+  </div>
+  <div class="container bottom">
+    <span>© {year} DevNode. All rights reserved.</span>
+    <a href="/privacy/">Privacy Policy</a>
+  </div>
+</footer>
+
+<style>
+  .site-footer { background: #0b1830; color: #9fb0cb; padding: 64px 0 28px; font-size: .95rem; }
+  .cols { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.3fr; gap: 40px; }
+  .brand p { margin-top: 16px; max-width: 320px; }
+  h4 { color: #fff; font-size: 1rem; margin-bottom: 14px; }
+  ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+  a { color: #9fb0cb; text-decoration: none; }
+  a:hover { color: #fff; }
+  .contact a, .contact span { display: inline-flex; align-items: center; gap: 8px; }
+  .contact :global(svg) { flex: none; }
+  .tag { font-size: .75rem; padding: 1px 8px; border-radius: 99px; background: rgba(255,255,255,.08); }
+  .bottom { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-top: 48px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,.08); font-size: .875rem; }
+  @media (max-width: 860px) { .cols { grid-template-columns: 1fr 1fr; } .brand { grid-column: 1 / -1; } }
+  @media (max-width: 520px) { .cols { grid-template-columns: 1fr; } }
+</style>

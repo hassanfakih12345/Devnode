@@ -1,0 +1,32 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import Icon from '../../components/Icon.astro';
+import { getCollection } from 'astro:content';
+const posts = (await getCollection('blog')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const fmt = (d: Date) => d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+---
+<Base title="Blog" description="Practical guides on websites, online stores and getting found on Google for businesses in Lebanon, Africa and the Gulf.">
+  <PageHero eyebrow="Blog" title="Insights for growing your business online" lead="Practical, no-jargon guides about websites, online stores and SEO." />
+  <section class="section">
+    <div class="container grid grid-3">
+      {posts.map((p) => (
+        <a class="card post" href={`/blog/${p.id}/`}>
+          <time datetime={p.data.date.toISOString()}>{fmt(p.data.date)}</time>
+          <h2>{p.data.title}</h2>
+          <p>{p.data.description}</p>
+          <span class="more">Read article <Icon name="arrow" size={16} /></span>
+        </a>
+      ))}
+    </div>
+  </section>
+</Base>
+
+<style>
+  .post { display: flex; flex-direction: column; text-decoration: none; color: inherit; transition: transform .2s ease; }
+  .post:hover { transform: translateY(-4px); }
+  time { font-size: .85rem; color: var(--blue-dark); font-weight: 600; margin-bottom: 10px; }
+  h2 { font-size: 1.25rem; }
+  p { color: var(--muted); font-size: .98rem; }
+  .more { margin-top: auto; display: inline-flex; gap: 6px; align-items: center; color: var(--blue-dark); font-weight: 600; }
+</style>

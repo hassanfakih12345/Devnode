@@ -1,0 +1,43 @@
+---
+// Stylised browser window used as a project thumbnail until real screenshots are added.
+interface Props { name: string; domain: string; accent: string; category: string; image?: string }
+const { name, domain, accent, category, image } = Astro.props;
+---
+<div class="mock" style={`--accent:${accent}`}>
+  <div class="chrome"><i></i><i></i><i></i><span>{domain}</span></div>
+  {image ? (
+    <img src={image} alt={`${name} website screenshot`} loading="lazy" />
+  ) : (
+    <div class="screen">
+      <div class="nav"><b>{name}</b><span></span><span></span><span></span></div>
+      <div class="hero">
+        <small>{category}</small>
+        <strong>{name}</strong>
+        <div class="lines"><span></span><span></span></div>
+        <em></em>
+      </div>
+      <div class="tiles"><span></span><span></span><span></span></div>
+    </div>
+  )}
+</div>
+
+<style>
+  .mock { border-radius: 12px; overflow: hidden; background: #fff; border: 1px solid var(--line); box-shadow: var(--shadow); }
+  .chrome { display: flex; align-items: center; gap: 6px; padding: 10px 12px; background: #eef2f8; }
+  .chrome i { width: 9px; height: 9px; border-radius: 50%; background: #cfd8e6; }
+  .chrome span { margin-left: 10px; font-size: .72rem; color: var(--muted); background: #fff; padding: 2px 10px; border-radius: 6px; flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; }
+  .screen { aspect-ratio: 16 / 10; display: flex; flex-direction: column; background: linear-gradient(160deg, color-mix(in srgb, var(--accent) 14%, #fff), #fff 60%); padding: 12px 16px; gap: 12px; }
+  .nav { display: flex; align-items: center; gap: 8px; font-size: .7rem; color: var(--navy); }
+  .nav b { margin-right: auto; font-family: var(--font-display); }
+  .nav span { width: 28px; height: 5px; border-radius: 3px; background: #d5dce7; }
+  .hero { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 6px; }
+  .hero small { font-size: .62rem; text-transform: uppercase; letter-spacing: .1em; color: var(--accent); font-weight: 600; }
+  .hero strong { font-family: var(--font-display); font-size: clamp(1.2rem, 3vw, 1.6rem); color: var(--navy); line-height: 1.1; }
+  .lines { display: grid; gap: 5px; }
+  .lines span { height: 5px; border-radius: 3px; background: #d5dce7; width: 70%; }
+  .lines span + span { width: 50%; }
+  .hero em { width: 64px; height: 18px; border-radius: 5px; background: var(--accent); margin-top: 4px; }
+  .tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .tiles span { height: 26px; border-radius: 6px; background: color-mix(in srgb, var(--accent) 18%, #fff); }
+</style>

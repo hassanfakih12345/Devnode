@@ -1,0 +1,47 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import Icon from '../../components/Icon.astro';
+import ProcessSteps from '../../components/ProcessSteps.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { services } from '../../data/site';
+---
+<Base title="Services" description="Business websites, e-commerce stores, landing pages, redesigns, hosting and SEO for companies in Lebanon, Africa and the Gulf.">
+  <PageHero eyebrow="Services" title="Websites that work as hard as you do" lead="Every service is designed around one goal: helping your business win more clients online." />
+
+  <section class="section">
+    <div class="container list">
+      {services.map((s, i) => (
+        <article class="item" id={s.slug}>
+          <div class="icon-badge"><Icon name={s.icon} size={26} /></div>
+          <div>
+            <h2>{s.title}</h2>
+            <p class="lead">{s.short}</p>
+            <ul class="checklist">
+              {s.includes.slice(0, 4).map((x) => <li><Icon name="check" size={18} /> {x}</li>)}
+            </ul>
+            <a class="btn btn-outline" href={`/services/${s.slug}/`}>Details <Icon name="arrow" size={18} /></a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="section soft">
+    <div class="container">
+      <div class="section-head"><span class="eyebrow">Our process</span><h2>How we work</h2></div>
+      <ProcessSteps />
+    </div>
+  </section>
+
+  <CtaBand />
+</Base>
+
+<style>
+  .list { display: grid; gap: 28px; }
+  .item { display: grid; grid-template-columns: auto 1fr; gap: 24px; padding: 32px; border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); }
+  .item h2 { font-size: 1.6rem; margin-bottom: .3em; }
+  .item .lead { font-size: 1.05rem; margin-bottom: 18px; }
+  .checklist { margin-bottom: 22px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+  @media (max-width: 600px) { .item { grid-template-columns: 1fr; padding: 24px; } }
+</style>

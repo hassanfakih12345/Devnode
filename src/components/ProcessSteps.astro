@@ -1,0 +1,23 @@
+---
+import { process } from '../data/site';
+---
+<ol class="steps">
+  {process.map((s, i) => (
+    <li>
+      <span class="num">{String(i + 1).padStart(2, '0')}</span>
+      <h3>{s.title}</h3>
+      <p>{s.text}</p>
+    </li>
+  ))}
+</ol>
+
+<style>
+  .steps { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; counter-reset: s; }
+  li { position: relative; padding-top: 18px; border-top: 2px solid var(--line); }
+  li::before { content: ''; position: absolute; top: -2px; left: 0; width: 48px; height: 2px; background: var(--grad); }
+  .num { font-family: var(--font-display); font-weight: 700; font-size: .9rem; color: var(--blue); }
+  h3 { margin: .3em 0 .4em; }
+  p { color: var(--muted); margin: 0; font-size: .98rem; }
+  :global(.dark) li { border-color: rgba(255,255,255,.12); }
+  :global(.dark) p { color: #aebbd2; }
+</style>

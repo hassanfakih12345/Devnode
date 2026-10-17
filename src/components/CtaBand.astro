@@ -1,0 +1,28 @@
+---
+import WhatsAppIcon from './WhatsAppIcon.astro';
+import { primaryPhone, waLink, pricing } from '../data/site';
+interface Props { title?: string; text?: string }
+const {
+  title = 'Ready to get your business online?',
+  text = `A complete website from $${pricing.launch}, with planning, development and one year of hosting included.`,
+} = Astro.props;
+---
+<section class="cta">
+  <div class="container inner">
+    <div>
+      <h2>{title}</h2>
+      <p>{text}</p>
+    </div>
+    <div class="btn-row">
+      <a class="btn btn-wa" href={waLink(primaryPhone.wa)} target="_blank" rel="noopener"><WhatsAppIcon size={20} /> Chat on WhatsApp</a>
+      <a class="btn btn-ghost-light" href="/contact/#quote">Request a Quote</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta { background: var(--navy); background-image: radial-gradient(circle at 90% 10%, rgba(34, 211, 238, .2), transparent 45%); padding: 72px 0; }
+  .inner { display: flex; align-items: center; justify-content: space-between; gap: 32px; flex-wrap: wrap; }
+  h2 { color: #fff; margin-bottom: .3em; }
+  p { color: #aebbd2; margin: 0; max-width: 560px; }
+</style>

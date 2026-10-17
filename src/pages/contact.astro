@@ -1,0 +1,137 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Icon from '../components/Icon.astro';
+import WhatsAppIcon from '../components/WhatsAppIcon.astro';
+import { phones, primaryPhone, waLink, site, services } from '../data/site';
+---
+<Base title="Contact Us" description="Contact DevNode on WhatsApp or request a quote for your website. We serve businesses in Lebanon, Africa and the Gulf.">
+  <PageHero eyebrow="Contact" title="Let's talk about your website" lead="WhatsApp is the fastest way to reach us. Or fill in the quote form and we'll get back to you with a clear proposal." />
+
+  <section class="section">
+    <div class="container cols">
+      <aside class="channels">
+        <h2>Reach us directly</h2>
+        {phones.map((p) => (
+          <a class="channel" href={waLink(p.wa)} target="_blank" rel="noopener">
+            <span class="ico wa"><WhatsAppIcon size={24} /></span>
+            <span><strong>WhatsApp · {p.label}</strong><small>{p.display}</small></span>
+          </a>
+        ))}
+        {site.email && (
+          <a class="channel" href={`mailto:${site.email}`}>
+            <span class="ico"><Icon name="mail" /></span>
+            <span><strong>Email</strong><small>{site.email}</small></span>
+          </a>
+        )}
+        <div class="channel static">
+          <span class="ico"><Icon name="globe" /></span>
+          <span><strong>Where we work</strong><small>Lebanon · Africa · the Gulf (remote)</small></span>
+        </div>
+      </aside>
+
+      <form id="quote" class="card form" novalidate>
+        <h2>Request a quote</h2>
+        <p class="hint">Fields marked * are required. Submitting opens WhatsApp with your request ready to send.</p>
+        <div class="row">
+          <label>Full name *<input name="name" required autocomplete="name" /></label>
+          <label>WhatsApp / phone *<input name="phone" type="tel" required autocomplete="tel" placeholder="+961 …" /></label>
+        </div>
+        <div class="row">
+          <label>Email<input name="email" type="email" autocomplete="email" /></label>
+          <label>Company / business<input name="company" autocomplete="organization" /></label>
+        </div>
+        <div class="row">
+          <label>Project type *
+            <select name="type" required>
+              <option value="">Choose…</option>
+              {services.map((s) => <option>{s.title}</option>)}
+              <option>Other</option>
+            </select>
+          </label>
+          <label>Country<input name="country" autocomplete="country-name" /></label>
+        </div>
+        <div class="row">
+          <label>Budget
+            <select name="budget">
+              <option value="">Choose…</option>
+              <option>$500 (standard website)</option>
+              <option>$500 – $1,000</option>
+              <option>$1,000 – $2,500</option>
+              <option>$2,500+</option>
+              <option>Not sure yet</option>
+            </select>
+          </label>
+          <label>Timeline
+            <select name="timeline">
+              <option value="">Choose…</option>
+              <option>As soon as possible</option>
+              <option>Within 1 month</option>
+              <option>1 – 3 months</option>
+              <option>Just exploring</option>
+            </select>
+          </label>
+        </div>
+        <label>Tell us about your project *<textarea name="message" rows="5" required placeholder="What does your business do? What pages or features do you need? Any websites you like?"></textarea></label>
+        <label class="hp" aria-hidden="true">Leave empty<input name="website" tabindex="-1" autocomplete="off" /></label>
+        <button class="btn btn-wa" type="submit"><WhatsAppIcon size={20} /> Send request</button>
+        <p class="status" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+</Base>
+
+<script define:vars={{ waNumber: primaryPhone.wa }}>
+  const form = document.getElementById('quote');
+  const status = form.querySelector('.status');
+  const labels = { name: 'Name', phone: 'Phone', email: 'Email', company: 'Company', type: 'Project type', country: 'Country', budget: 'Budget', timeline: 'Timeline', message: 'Details' };
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    status.className = 'status';
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+    const data = new FormData(form);
+    if (data.get('website')) return;
+
+    const lines = ['*New website request – devnode.info*', ''];
+    for (const [key, label] of Object.entries(labels)) {
+      const v = String(data.get(key) || '').trim();
+      if (v) lines.push(`*${label}:* ${v}`);
+    }
+    window.open(`https://wa.me/${waNumber}?text=${encodeURIComponent(lines.join('\n'))}`, '_blank', 'noopener');
+
+    // Also email a copy (handled by send.php on the server; harmless if email isn't configured yet).
+    fetch('/send.php', { method: 'POST', body: data }).catch(() => {});
+
+    status.textContent = 'Thank you! WhatsApp has opened with your request. Just press send and we will reply shortly.';
+    status.classList.add('ok');
+    form.reset();
+  });
+</script>
+
+<style>
+  .cols { display: grid; grid-template-columns: .8fr 1.2fr; gap: 48px; align-items: start; }
+  .channels h2 { font-size: 1.5rem; }
+  .channel { display: flex; align-items: center; gap: 16px; padding: 18px; border: 1px solid var(--line); border-radius: var(--radius); margin-bottom: 12px; text-decoration: none; color: var(--text); transition: border-color .15s ease; }
+  a.channel:hover { border-color: var(--blue); }
+  .channel span:last-child { display: flex; flex-direction: column; }
+  .channel small { color: var(--muted); font-size: .95rem; }
+  .ico { width: 48px; height: 48px; border-radius: 12px; display: grid; place-items: center; background: rgba(34,156,216,.1); color: var(--blue); flex: none; }
+  .ico.wa { background: rgba(37,211,102,.12); color: #1aa553; }
+  .form h2 { font-size: 1.5rem; margin-bottom: .2em; }
+  .hint { color: var(--muted); font-size: .92rem; }
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  label { display: flex; flex-direction: column; gap: 6px; font-weight: 500; font-size: .92rem; color: var(--navy); margin-bottom: 16px; }
+  input, select, textarea { font: inherit; font-size: 1rem; padding: .75rem .9rem; border: 1px solid #cfd8e6; border-radius: 10px; background: #fff; color: var(--text); width: 100%; }
+  input:focus, select:focus, textarea:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px rgba(34,156,216,.15); }
+  textarea { resize: vertical; }
+  .hp { position: absolute; left: -9999px; }
+  .form .btn { width: 100%; margin-top: 4px; }
+  .status { margin: 14px 0 0; font-size: .95rem; }
+  .status.ok { color: #138a43; }
+  @media (max-width: 900px) { .cols { grid-template-columns: 1fr; } }
+  @media (max-width: 560px) { .row { grid-template-columns: 1fr; gap: 0; } }
+</style>
