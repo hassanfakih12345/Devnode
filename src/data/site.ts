@@ -165,6 +165,9 @@ export type Project = {
   category: string;
   summary: string;
   work: string[];
+  // One-line result written in DevNode's voice for the home page highlights
+  highlight: string;
+  tags: string[];
   accent: string;
   // Screenshots live in public/images/projects/<slug>/
   image?: string;
@@ -190,6 +193,9 @@ export const projects: Project[] = [
       'Clients and certificates pages with in-browser PDF viewing',
       'Quote request form that opens WhatsApp, ready to send',
     ],
+    highlight:
+      'A bilingual corporate website presenting 25+ years of contracting work, 20+ projects, major clients and official certificates, with quote requests delivered straight to WhatsApp.',
+    tags: ['Arabic / English', 'Project portfolio', 'WhatsApp quotes'],
     accent: '#1E3A8A',
     image: '/images/projects/dolook/thumb.jpg',
     gallery: [
@@ -218,6 +224,9 @@ export const projects: Project[] = [
       'Cart, search and brand pages (About, Founder, How it works)',
       'Elegant, mobile-first design matching the brand',
     ],
+    highlight:
+      'An online store with a live case designer: customers upload their photos, preview the case in 2D or 3D and send the design to the studio on WhatsApp.',
+    tags: ['Arabic / English', 'Live customiser', 'E-commerce'],
     accent: '#7A2E45',
     image: '/images/projects/coverf/thumb.jpg',
     gallery: [
@@ -244,6 +253,9 @@ export const projects: Project[] = [
       'Cart with quantities and subtotal, ordered via WhatsApp in one tap',
       'Mobile-first design for shoppers on their phones',
     ],
+    highlight:
+      'A French-language perfume boutique for Kinshasa with brand filters, promotions and a cart that sends the full order to WhatsApp in one tap.',
+    tags: ['French', 'Catalogue & filters', 'WhatsApp orders'],
     accent: '#B91C1C',
     image: '/images/projects/kin-lattafa/thumb.jpg',
     gallery: [

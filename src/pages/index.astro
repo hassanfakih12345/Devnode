@@ -111,6 +111,32 @@ import { services, projects, values, pricing, primaryPhone, waLink, testimonials
     </div>
   </section>
 
+  <section class="section">
+    <div class="container">
+      <div class="section-head center">
+        <span class="eyebrow">Client highlights</span>
+        <h2>Trusted by businesses in three markets</h2>
+        <p class="lead">From contractors in Saudi Arabia to retailers in Beirut and Kinshasa, here is what we built for each of them.</p>
+      </div>
+      <div class="grid grid-3">
+        {projects.map((p) => (
+          <article class="card highlight" style={`--accent:${p.accent}`}>
+            <div class="hl-head">
+              {p.image && <img src={p.image} alt="" width="56" height="56" loading="lazy" />}
+              <div>
+                <h3>{p.name}</h3>
+                <span><Icon name="pin" size={14} /> {p.country}</span>
+              </div>
+            </div>
+            <p>{p.highlight}</p>
+            <ul class="tags">{p.tags.map((t) => <li>{t}</li>)}</ul>
+            <a href={`/portfolio/${p.slug}/`}>View case study <Icon name="arrow" size={16} /></a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
   {testimonials.length > 0 && (
     <section class="section">
       <div class="container">
@@ -198,6 +224,15 @@ import { services, projects, values, pricing, primaryPhone, waLink, testimonials
   .split { max-width: none; display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; }
   .split > div { max-width: 640px; }
 
+  .highlight { display: flex; flex-direction: column; border-top: 4px solid var(--accent); }
+  .hl-head { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; }
+  .hl-head img { width: 56px; height: 56px; border-radius: 12px; object-fit: cover; object-position: left top; border: 1px solid var(--line); flex: none; }
+  .hl-head h3 { margin: 0 0 2px; }
+  .hl-head span { display: inline-flex; align-items: center; gap: 4px; font-size: .85rem; color: var(--muted); }
+  .highlight p { color: var(--text); font-size: 1rem; }
+  .tags { list-style: none; padding: 0; margin: 0 0 20px; display: flex; flex-wrap: wrap; gap: 8px; }
+  .tags li { font-size: .78rem; font-weight: 600; padding: 4px 10px; border-radius: 99px; background: var(--bg-soft); color: var(--navy); border: 1px solid var(--line); }
+  .highlight a { margin-top: auto; display: inline-flex; align-items: center; gap: 6px; font-weight: 600; font-size: .95rem; text-decoration: none; }
   .quote { margin: 0; }
   .quote blockquote { margin: 0 0 16px; font-size: 1.02rem; }
   .quote figcaption { display: flex; flex-direction: column; font-size: .9rem; }
