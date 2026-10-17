@@ -28,8 +28,8 @@ export const manager = {
   name: 'Hassan Ahmad Fakih',
   role: 'Founder & Managing Director',
   initials: 'HF',
-  // Put the photo at public/images/hassan-fakih.jpg and set this to '/images/hassan-fakih.jpg'
-  photo: '',
+  // Square photo, shown as a circle. Set to '' to show initials instead.
+  photo: '/images/hassan-fakih.jpg',
   bio: [
     'Hassan founded DevNode with a simple idea: every business deserves a professional website without the long delays and inflated prices that usually come with it.',
     'Working with clients across Lebanon, Central Africa and Saudi Arabia, he leads every project personally, from the first planning call to launch day, and stays the direct point of contact long after the site goes live.',

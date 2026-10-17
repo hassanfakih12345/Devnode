@@ -39,7 +39,7 @@ import { manager, values, site } from '../data/site';
   <section class="section">
     <div class="container leader">
       <div class="photo">
-        {manager.photo ? <img src={manager.photo} alt={manager.name} width="320" height="380" /> : <div class="initials" aria-hidden="true">{manager.initials}</div>}
+        {manager.photo ? <img src={manager.photo} alt={manager.name} width="320" height="320" loading="lazy" /> : <div class="initials" aria-hidden="true">{manager.initials}</div>}
       </div>
       <div>
         <span class="eyebrow">Leadership</span>
@@ -60,7 +60,7 @@ import { manager, values, site } from '../data/site';
   .stats strong { font-family: var(--font-display); font-size: 2rem; color: var(--navy); }
   .stats span { color: var(--muted); font-size: .92rem; }
   .leader { display: grid; grid-template-columns: 320px 1fr; gap: 56px; align-items: center; }
-  .photo img, .initials { width: 100%; aspect-ratio: 32 / 38; border-radius: 20px; object-fit: cover; box-shadow: var(--shadow-lg); }
+  .photo img, .initials { width: 100%; height: auto; aspect-ratio: 1; border-radius: 50%; object-fit: cover; box-shadow: 0 0 0 6px #fff, 0 0 0 9px var(--blue), var(--shadow-lg); }
   .initials { display: grid; place-items: center; background: var(--navy); background-image: var(--grad); color: #fff; font-family: var(--font-display); font-size: 5rem; font-weight: 700; }
   .role { color: var(--blue-dark); font-weight: 600; margin-top: -.6em; }
   @media (max-width: 860px) { .cols, .leader { grid-template-columns: 1fr; } .photo { max-width: 280px; } }
