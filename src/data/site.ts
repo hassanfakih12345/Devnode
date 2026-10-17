@@ -201,6 +201,32 @@ export const projects: Project[] = [
     ],
   },
   {
+    slug: 'coverf',
+    name: 'COVERF',
+    url: 'https://www.coverf.net',
+    domain: 'coverf.net',
+    country: 'Lebanon',
+    category: 'E-commerce Store',
+    summary:
+      'An online store for a Beirut studio making custom phone cases and accessories, with a live case designer where customers upload their own photos and send the design on WhatsApp.',
+    work: [
+      'Bilingual Arabic / English store with full right-to-left support',
+      'Product catalogue with categories, prices and phone model selection',
+      'Live case customiser with 2D / 3D preview and photo upload',
+      'Designs and orders sent straight to WhatsApp',
+      'Cart, search and brand pages (About, Founder, How it works)',
+      'Elegant, mobile-first design matching the brand',
+    ],
+    accent: '#7A2E45',
+    image: '/images/projects/coverf/thumb.jpg',
+    gallery: [
+      { src: '/images/projects/coverf/new-arrivals.jpg', caption: 'New arrivals with prices' },
+      { src: '/images/projects/coverf/customizer.jpg', caption: 'Live case customiser' },
+      { src: '/images/projects/coverf/about.jpg', caption: 'About the brand' },
+      { src: '/images/projects/coverf/contact.jpg', caption: 'Custom order form via WhatsApp' },
+    ],
+  },
+  {
     slug: 'kin-lattafa',
     name: 'Kin Lattafa',
     url: 'https://www.kinlattafa.store',
@@ -211,18 +237,6 @@ export const projects: Project[] = [
       'An online store that lets customers in Kinshasa browse the full product range and place orders directly from their phones.',
     work: ['Store design and setup', 'Product catalogue', 'Mobile ordering flow', 'Hosting and launch'],
     accent: '#8B5CF6',
-  },
-  {
-    slug: 'coverf',
-    name: 'CoverF',
-    url: 'https://www.coverf.net',
-    domain: 'coverf.net',
-    country: 'International',
-    category: 'Business Website',
-    summary:
-      'A professional company website that presents the brand, its offering and an easy way for new clients to get in touch.',
-    work: ['Website design', 'Development', 'Contact integration', 'Hosting and launch'],
-    accent: '#10B981',
   },
 ];
 
